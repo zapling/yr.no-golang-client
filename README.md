@@ -4,6 +4,10 @@ A simple unofficial golang client for Yr.no `2.0` API
 
 # Usage
 
+```
+$ go get github.com/zapling/yr.no-golang-client
+```
+
 ```golang
 package main
 
