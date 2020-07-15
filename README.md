@@ -1,6 +1,6 @@
 # yr.no-golang-client
 
-A simple unofficial golang client for Yr.no API
+A simple unofficial golang client for Yr.no `2.0` API
 
 # Usage
 
