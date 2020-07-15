@@ -1,4 +1,4 @@
-package yrno
+package yr
 
 import (
 	"encoding/json"
