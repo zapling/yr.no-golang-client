@@ -21,6 +21,22 @@ func main() {
     // yr.PointGeometry{Type:"Point", Coordinates:[]float64{9.58, 60.1, 496}}
 }
 ```
+
+# Todo
+
+* Tests
+* Better handling of optional fields, should maybe be `nil` instead of empty value `string => ""`
+
+# Contribution
+
+Feel free to open an PR for improvments.
+
 # Docs
 
 https://api.met.no/weatherapi/locationforecast/2.0/documentation
+
+# Licence
+
+MIT License
+
+Copyright 2020 Andreas Palm
