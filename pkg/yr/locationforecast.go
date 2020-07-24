@@ -149,7 +149,7 @@ func GetLocationForecast(lat float64, lon float64, userAgent string) (LocationFo
 		return Forecast, err
 	}
 
-	if res.StatusCode != 200 && res.StatusCode != 201 {
+	if res.StatusCode != 200 && res.StatusCode != 203 {
 		return Forecast, errors.New(res.Status)
 	}
 
