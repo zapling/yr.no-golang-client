@@ -119,35 +119,34 @@ type ForecastSummary struct {
 	SymbolCode string `json:"symbol_code"`
 }
 
-func GetLocationForecast(lat float64, lon float64, userAgent string) (LocationForecast, error) {
-	var Forecast LocationForecast
-	url := fmt.Sprintf("%s/locationforecast/%s/compact", api_url, api_version)
-
-	qParams := map[string]string{
-		"lat": fmt.Sprintf("%.2f", lat),
-		"lon": fmt.Sprintf("%.2f", lon),
-	}
-
+func request(url string, queryParams map[string]string, userAgent string) (*http.Response, error) {
 	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return Forecast, err
-	}
 
 	// Add query params
 	reqQuery := req.URL.Query()
-	for k, v := range qParams {
+	for k, v := range queryParams {
 		reqQuery.Add(k, v)
 	}
 	req.URL.RawQuery = reqQuery.Encode()
 
-	// Add User-Agent header
-	req.Header.Add("User-Agent", userAgent)
+	// Set User-Agent
+	req.Header.Set("User-Agent", userAgent)
 
-	// Do request
+	// Send request
 	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		return Forecast, err
+	return res, err
+}
+
+func GetLocationForecast(lat float64, lon float64, userAgent string) (LocationForecast, error) {
+	var Forecast LocationForecast
+	url := fmt.Sprintf("%s/locationforecast/%s/compact", api_url, api_version)
+
+	queryParams := map[string]string{
+		"lat": fmt.Sprintf("%.2f", lat),
+		"lon": fmt.Sprintf("%.2f", lon),
 	}
+
+	res, err := request(url, queryParams, userAgent)
 
 	if res.StatusCode != 200 && res.StatusCode != 203 {
 		return Forecast, errors.New(res.Status)
