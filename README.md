@@ -30,7 +30,7 @@ func main() {
 
 * Tests
 * Rate limiting?
-* Status `203` should be ok as it's used as a version [deprecation warning](https://api.met.no/doc/TermsOfService#generalinformationabouttheservice) by YR.
+* ~~Status `203` should be ok as it's used as a version [deprecation warning](https://api.met.no/doc/TermsOfService#generalinformationabouttheservice) by YR.~~
 * Better handling of optional fields, should maybe be `nil` instead of empty value `string => ""`
 
 # Contribution
