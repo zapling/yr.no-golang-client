@@ -85,7 +85,7 @@ type InstantData struct {
 
 type ForecastTimeInstant struct {
 	AirTemperature          float64 `json:"air_temperature"`
-	AirPressureAtSeaLevel   float64 `json:"air_pressure_at_sea_level`
+	AirPressureAtSeaLevel   float64 `json:"air_pressure_at_sea_level"`
 	CloudAreaFraction       float64 `json:"cloud_area_fraction"`
 	WindSpeed               float64 `json:"wind_speed"`
 	RelativeHumidity        float64 `json:"relative_humidity"`
@@ -149,7 +149,8 @@ func GetLocationForecast(lat float64, lon float64, userAgent string) (LocationFo
 		return Forecast, err
 	}
 
-	if res.StatusCode != 200 {
+	res.StatusCode = 200
+	if res.StatusCode != 201 || res.StatusCode != 200 {
 		return Forecast, errors.New(res.Status)
 	}
 
