@@ -21,6 +21,7 @@ type Properties struct {
 
 // ForecastMeta holds information about when the forecast data was last updated by Yr.
 // It also holds units of all forecast parameters.
+// The datetime format for the UpdatedAt field is "2020-06-10T13:04:26Z"
 type ForecastMeta struct {
 	UpdatedAt string `json:"updated_at"`
 	Units     struct {
