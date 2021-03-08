@@ -6,6 +6,7 @@ import (
 
 	"github.com/zapling/yr.no-golang-client/client"
 	"github.com/zapling/yr.no-golang-client/locationforecast"
+	"github.com/zapling/yr.no-golang-client/utils"
 )
 
 func main() {
@@ -17,6 +18,8 @@ func main() {
 		return
 	}
 
-	fmt.Printf("%+v\n", forecast.Geometry)
+	temperature := forecast.Properties.Timeseries[0].Data.Instant.Details.AirTemperature
+
+	fmt.Printf("%v\n", utils.Float64Value(temperature))
 	fmt.Printf("Forecast can be re-fetched after: %v", response.Header.Get("expires"))
 }
