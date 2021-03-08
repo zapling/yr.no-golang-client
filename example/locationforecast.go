@@ -9,13 +9,14 @@ import (
 )
 
 func main() {
-	yrClient := client.NewYrClient(http.DefaultClient, "Yr.no go client example")
+	yrClient := client.NewYrClient(http.DefaultClient, "Yr.no golang example")
 
-	forecast, err := locationforecast.GetCompact(yrClient, 60.1, 9.58)
+	forecast, response, err := locationforecast.GetCompact(yrClient, 60.1, 9.58)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	fmt.Printf("%+v", forecast.Geometry)
+	fmt.Printf("%+v\n", forecast.Geometry)
+	fmt.Printf("Forecast can be re-fetched after: %v", response.Header.Get("expires"))
 }

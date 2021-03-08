@@ -3,11 +3,21 @@ package locationforecast
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/zapling/yr.no-golang-client/client"
 )
 
-func GetCompact(client *client.YrClient, latitude float64, longitude float64) (*GeoJson, error) {
+// GetCompact get weather forecast for a specific place specified by the latitude and longitude
+// coordinates.
+// On success you should cache the forecast for one hour beforing re-fetching it.
+//
+// https://api.met.no/weatherapi/locationforecast/2.0/documentation#!/data/get_compact
+func GetCompact(
+	client *client.YrClient,
+	latitude float64,
+	longitude float64,
+) (*GeoJson, *http.Response, error) {
 	var forecast GeoJson
 
 	apiUrl := fmt.Sprintf(
@@ -20,12 +30,16 @@ func GetCompact(client *client.YrClient, latitude float64, longitude float64) (*
 
 	response, err := client.GetRequest(apiUrl)
 	if err != nil {
-		return nil, err
+		if response == nil {
+			return nil, nil, err
+		}
+
+		return nil, response, err
 	}
 
 	if err = json.NewDecoder(response.Body).Decode(&forecast); err != nil {
-		return nil, err
+		return nil, response, err
 	}
 
-	return &forecast, nil
+	return &forecast, response, nil
 }
