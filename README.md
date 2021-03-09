@@ -14,7 +14,7 @@ func main() {
 
     forecast, response, err := locationforecast.GetCompact(yrClient, 60.1, 9.58)
 	if err != nil {
-        fmt.Println(err)
+        	fmt.Println(err)
         return
     }
 
